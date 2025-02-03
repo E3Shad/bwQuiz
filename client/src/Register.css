@@ -1,0 +1,19 @@
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    /* background-color: #4CAF50; */
+}
+
+.styled-button {
+    color: #FFFFFF;
+    border: 3px solid #14E399;
+    border-radius: 30px;
+    background: #0000FF;
+    margin: 1em;
+    /* width: auto; */
+    padding: 0.5em 1.5em;
+    font-size: 3vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* transition: background 0.3s ease; */
+}

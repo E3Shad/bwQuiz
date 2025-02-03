@@ -1,0 +1,29 @@
+.styled-input {
+    font-size: 3vw;
+    width: 60%;
+    padding: 1em 2em;
+    border-radius: 30px;
+    border: 3px solid #0000FF;
+    outline: none;
+    text-align: left;
+    color: #0000FF;
+    background: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-button {
+    color: #FFFFFF;
+    border: 3px solid #14E399;
+    border-radius: 30px;
+    background: #0000FF;
+    margin: 1em;
+    /* width: auto; */
+    padding: 0.5em 1.5em;
+    font-size: 3vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* transition: background 0.3s ease; */
+}
+
+.styled-button:hover {
+    background: #14E399;
+}
