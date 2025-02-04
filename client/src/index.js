@@ -12,11 +12,11 @@ import './fonts.css';
 
 
 const App = () => {
-  useEffect(() => {
-    if (window.location.protocol !== 'https:') {
-      window.location.href = window.location.href.replace('http', 'https');
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.location.protocol !== 'https:') {
+  //     window.location.href = window.location.href.replace('http', 'https');
+  //   }
+  // }, []);
   return (
     <Router>
       <div className="App" >

@@ -6,11 +6,15 @@ import quizlogo from './images/quizlogo.png';
 import quizbackground from './images/quizbackground.png';
 import finishImage from './images/finish.png'
 import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const FinishPage = () => {
     const [deviceType, setDeviceType] = useState('ipad');
     const navigate = useNavigate();
     const location = useLocation();
+    const [quizCode, setQuizCode] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     const handleResize = () => {
         const width = window.innerWidth;
@@ -39,6 +43,26 @@ const FinishPage = () => {
         // Cleanup timer on unmount
         return () => clearTimeout(timer);
     }, [navigate]);
+
+    useEffect(() => {
+        const getQuizCode = async () => {
+            try {
+                const response = await axios.post('http://localhost:5000/quiz-completion', {
+                    quizId: 'quiz1',
+                    score: location.state?.correctAnswersCount || 0,
+                    userId: 'user123' // Replace with actual user ID
+                });
+                setQuizCode(response.data.code);
+            } catch (err) {
+                setError('Failed to get code');
+                console.error(err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        getQuizCode();
+    }, [location.state?.correctAnswersCount]);
 
     return (
         <>
@@ -73,10 +97,19 @@ const FinishPage = () => {
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row style={{ height: '10vh', margin: 0, paddingBottom: '10vh' }}>
-                        <Grid.Column style={{ maxWidth: 450, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Grid.Column style={{ maxWidth: 450, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Grid.Row style={{ color: 'white', fontSize: deviceType == 'ipad' ? '8vh' : '6vh' }}>
                                 Congratulations!
                             </Grid.Row>
+                            {isLoading ? (
+                                <div style={{ color: 'white', marginTop: '2vh' }}>Loading your code...</div>
+                            ) : error ? (
+                                <div style={{ color: 'red', marginTop: '2vh' }}>{error}</div>
+                            ) : (
+                                <div style={{ color: '#14E399', fontSize: '5vh', marginTop: '2vh' }}>
+                                    Your Code: {quizCode}
+                                </div>
+                            )}
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row style={{ height: '30vh', margin: 0, padding: 0 }}>

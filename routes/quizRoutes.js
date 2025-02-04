@@ -40,9 +40,10 @@ const validateRegister = (req, res, next) => {
 };
 
 quizRoutes.route("/register").post(rateLimiter, validateRegister, function (req, res) {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-        return res.redirect(`https://${req.header('host')}${req.url}`);
-    }
+    // Remove or modify HTTPS redirect for local development
+    // if (process.env.NODE_ENV === 'production' && req.headers['x-forwarded-proto'] !== 'https') {
+    //     return res.redirect(`https://${req.header('host')}${req.url}`);
+    // }
 
     // const { firstName, lastName, email, phoneNumber, score } = req.decryptedData;
     // const { firstName, email, score } = req.decryptedData;
